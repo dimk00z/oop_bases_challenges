@@ -8,15 +8,42 @@
     3. Увеличьте баланс счета у экземпляра класса с помощью метода increase_balance и снова распечатайте текущий баланс.
 """
 
+from dataclasses import dataclass
 
+from faker import Faker
+
+from helpers.fake import get_fake, get_py_float
+
+
+@dataclass
 class BankAccount:
-    def __init__(self, owner_full_name: str, balance: float):
-        self.owner_full_name = owner_full_name
-        self.balance = balance
+    """Simple bank account class"""
 
-    def increase_balance(self, income: float):
-        pass  # код писать тут
+    owner_full_name: str
+    balance: float
+
+    def increase_balance(self, income: float) -> None:
+        """Increase balance by income"""
+        self.balance += income
 
 
-if __name__ == '__main__':
-    pass  # код писать тут
+def get_fake_bank_account(fake: Faker) -> BankAccount:
+    "Fake bank account generator."
+    return BankAccount(owner_full_name=fake.user_name(), balance=get_py_float(fake))
+
+
+def main():
+    "Main function."
+
+    fake: Faker = get_fake()
+
+    bank_account: BankAccount = get_fake_bank_account(fake)
+    print(f"{bank_account.balance=}")
+
+    bank_account.increase_balance(get_py_float(fake))
+
+    print(f"{bank_account.balance=}")
+
+
+if __name__ == "__main__":
+    main()
