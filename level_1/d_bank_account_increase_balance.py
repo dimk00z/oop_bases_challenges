@@ -29,7 +29,10 @@ class BankAccount:
 
 def get_fake_bank_account(fake: Faker) -> BankAccount:
     "Fake bank account generator."
-    return BankAccount(owner_full_name=fake.user_name(), balance=get_py_float(fake))
+    return BankAccount(
+        owner_full_name=fake.user_name(),
+        balance=get_py_float(fake),
+    )
 
 
 def main():
