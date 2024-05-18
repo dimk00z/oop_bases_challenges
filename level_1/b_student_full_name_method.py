@@ -9,6 +9,8 @@ from dataclasses import dataclass
 
 from faker import Faker
 
+from helpers.fake import get_fake
+
 
 @dataclass
 class Student:
@@ -37,8 +39,8 @@ def get_fake_student(fake: Faker) -> Student:
 def main():
     "Main function."
 
-    Faker.seed()
-    fake = Faker("ru_RU")
+    fake: Faker = get_fake()
+
     student: Student = get_fake_student(fake)
     student_full_name = student.get_full_name()
     print(student_full_name)
