@@ -40,7 +40,7 @@ def main() -> None:
     Example poetry run python level_1/a_user_instance.py
     Информация о пользователе: apotapova, Меркушев Сократ Чеславович, 97, 8 475 938 24 21
     """
-    Faker.seed(0)
+    Faker.seed()
     fake = Faker("ru_RU")
     user: User = get_fake_user(fake)
     print(user)
