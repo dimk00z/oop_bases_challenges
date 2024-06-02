@@ -15,6 +15,7 @@ from helpers.fake import get_fake
 @dataclass
 class User:
     "Simple user class"
+
     name: str
     username: str
     age: int
