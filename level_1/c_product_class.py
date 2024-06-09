@@ -19,6 +19,7 @@ from helpers.fake import get_fake
 @dataclass
 class Product:
     "Simple product class"
+
     name: str
     description: str
     price: Decimal
