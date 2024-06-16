@@ -10,6 +10,13 @@
     4. Создать экземпляр класс FoodProduct с ценой больше 10 и вызвать у него метод get_product_info.
 """
 
+from typing import Protocol
+
+
+class Priced(Protocol):
+    @property
+    def price(self) -> float: ...
+
 
 class Product:
     def __init__(self, title: str, price: float):
@@ -17,14 +24,30 @@ class Product:
         self.price = price
 
     def get_product_info(self):
-        return f'Product title: {self.title}, price: {self.price}'
+        return f"Product title: {self.title}, price: {self.price}"
 
 
 class FoodProductMixin:
-    def is_premium_food(self):
+    def is_premium_food(self: Priced):
         return self.price > 10
 
 
-if __name__ == '__main__':
-    pass  # код писать тут
+class FoodProduct(FoodProductMixin, Product):
+    def get_product_info(self):
+        product_info: str = super().get_product_info()
+        if not self.is_premium_food():
+            return product_info
+        return f"{product_info} (Premium)"
 
+
+if __name__ == "__main__":
+    non_premium_product: FoodProduct = FoodProduct(
+        "Гречка",
+        price=5,
+    )
+    print(non_premium_product.get_product_info())
+    premium_product: FoodProduct = FoodProduct(
+        "Гречка элитная в пакете",
+        price=11,
+    )
+    print(premium_product.get_product_info())
