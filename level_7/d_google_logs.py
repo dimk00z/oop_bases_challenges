@@ -8,6 +8,7 @@
     2. Исправьте класс GoogleLogger таким образом, чтобы максимальный размер данных, был бы 10 байт
     3. Запустите текущий код и убедитесь, что валидация перестала проходить.
 """
+
 import json
 
 
@@ -23,17 +24,19 @@ class Logger:
 
     def get_data_size(self):
         serialized_data = json.dumps(self.data)
-        return len(serialized_data.encode('utf-8'))
+        return len(serialized_data.encode("utf-8"))
 
 
 class GoogleLogger(Logger):
+    max_log_size = 10
+
     def is_valid(self):
         return self.is_log_size_valid() and bool(self.message)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     google_logger_instance = GoogleLogger(
-        data={'user_id': 1, 'user_email': 'learn_python.gmail.com'},
-        message='User registered',
+        data={"user_id": 1, "user_email": "learn_python.gmail.com"},
+        message="User registered",
     )
     print(google_logger_instance.is_valid())
