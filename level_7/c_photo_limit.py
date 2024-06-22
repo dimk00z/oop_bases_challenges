@@ -3,7 +3,7 @@
 
 Задания:
     1. Допишите функцию generate_photos_limit_message таким образом, чтобы она возвращала строку:
-       "Вы можете загрузить не более 10 фотографий".
+       "Вы можете загрузить не более 10 ".
        Лимит фоток нужно взять из класса PhotoForm.
        Инстансы класса создавать нельзя.
     2. Вызовите функцию generate_photos_limit_message и убедитесь, что она возвращает правильную строку.
@@ -22,8 +22,8 @@ class PhotoForm:
 
 
 def generate_photos_limit_message():
-    return  # код писать тут
+    return f"Вы можете загрузить не более {PhotoForm.max_photos_number} фотографий"
 
 
-if __name__ == '__main__':
-    pass  # код писать тут
+if __name__ == "__main__":
+    print(generate_photos_limit_message())

@@ -9,14 +9,21 @@
     3. Запустите текущий код и убедитесь, что теперь мы получаем число в выводе, вместо ошибки.
 """
 
+from itertools import chain
+
 
 class StudentGroup:
     def __init__(self, group_number: int, grades: list[int]):
         self.group_number = group_number
         self.grades = grades
 
+    def __add__(self, group: "StudentGroup"):
+        return sum(chain(self.grades, group.grades))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     first_group = StudentGroup(group_number=1, grades=[1, 4, 6, 3])
     second_group = StudentGroup(group_number=2, grades=[6, 3, 7, 3, 2])
+
+    # по идеи __add__ должен возвращать объект того же типа, но из задания просто сумма
     print(first_group + second_group)
